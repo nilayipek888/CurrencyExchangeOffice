@@ -5,25 +5,42 @@ The system simulates an online currency exchange office. It is divided into sepa
 
 1. Web Service
    - Provides business logic.
-   - Retrieves current exchange rates from the National Bank of Poland API.
+   - Retrieves current and historical exchange rates from the National Bank of Poland API.
    - Exposes methods for client applications.
+   - Implements simulated buy and sell operations.
 
 2. Client Application
    - Console client prepared for testing service communication.
-   - Can be extended later to WPF.
+   - Connects to the WCF/CoreWCF service using BasicHttpBinding.
+   - Displays exchange rates and example transaction results.
 
 3. Database
-   - Folder prepared for future SQL schema and initialization scripts.
-   - Planned data: users, balances, and transactions.
+   - SQL schema prepared for users, currency balances and transaction history.
+   - Can be connected to the service in a later stage.
 
 ## Implemented Functionality
 - Service status check.
 - Currency exchange rate retrieval by currency code.
-- NBP API integration structure.
+- Historical exchange rate retrieval by currency code and date.
+- Buying foreign currency for a PLN amount.
+- Selling foreign currency for PLN.
+- NBP API integration.
+- Console client consuming service methods.
+
+## Service Methods
+
+```csharp
+string GetServiceStatus();
+Task<decimal> GetExchangeRateAsync(string currencyCode);
+Task<decimal> GetHistoricalExchangeRateAsync(string currencyCode, string date);
+Task<ExchangeResult> BuyCurrencyAsync(string currencyCode, decimal plnAmount);
+Task<ExchangeResult> SellCurrencyAsync(string currencyCode, decimal foreignCurrencyAmount);
+```
 
 ## Planned Functionality
-- User accounts.
+- WPF graphical client.
+- User account registration.
 - Virtual account balance top-up.
-- Buying and selling currencies.
-- Transaction history.
-- Historical exchange rates.
+- Persistent transaction history.
+- Persistent currency balances.
+- Reports for historical exchange rates.

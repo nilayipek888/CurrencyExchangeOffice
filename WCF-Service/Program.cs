@@ -18,6 +18,6 @@ app.UseServiceModel(serviceBuilder =>
         "/ExchangeService");
 });
 
-app.MapGet("/", () => "Currency Exchange Office service is running. Use /ExchangeService for SOAP endpoint.");
+app.MapGet("/", () => "Currency Exchange Office service is running. SOAP endpoint: http://localhost:5000/ExchangeService");
 
 app.Run();
